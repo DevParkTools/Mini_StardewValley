@@ -101,7 +101,28 @@ body:not(.ingame) .g{display:none!important}
 #shint{position:absolute;bottom:8%;font-size:22px;animation:blink 1s steps(2) infinite;visibility:hidden}
 @keyframes blink{50%{opacity:.2}}
 #sskip{width:auto;position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;margin:0;padding:6px 12px;font-size:15px}
-#banner{position:fixed;left:0;right:0;top:20%;z-index:18;text-align:center;pointer-events:none;opacity:0;color:#fff4c0;font-size:clamp(28px,7.5vw,48px);text-shadow:3px 0 0 #3e2612,-3px 0 0 #3e2612,0 3px 0 #3e2612,0 -3px 0 #3e2612,3px 3px 0 #3e2612,-3px -3px 0 #3e2612,3px -3px 0 #3e2612,-3px 3px 0 #3e2612,0 6px 0 rgba(0,0,0,.35)}
+#zz{position:fixed;inset:0;z-index:27;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;pointer-events:none;color:#cfe0ff;background:radial-gradient(circle at 50% 40%,rgba(40,50,110,.0),rgba(10,10,30,.0))}
+#zz.on{display:flex;animation:zin .5s ease-out}
+@keyframes zin{from{opacity:0}to{opacity:1}}
+#zz .moon{width:44px;height:44px;border-radius:50%;box-shadow:-12px 6px 0 0 #fff2b8;background:transparent;margin-left:12px;filter:drop-shadow(0 0 8px rgba(255,240,170,.7))}
+#zz .zl{display:flex;gap:6px;font-size:34px;height:48px;align-items:flex-end}
+#zz .zl span{opacity:0;animation:zf 1.4s ease-out infinite;text-shadow:2px 2px 0 #1a2050}
+#zz .zl span:nth-child(2){animation-delay:.3s;font-size:.8em}
+#zz .zl span:nth-child(3){animation-delay:.6s;font-size:.6em}
+@keyframes zf{0%{opacity:0;transform:translateY(10px) scale(.6)}35%{opacity:1}100%{opacity:0;transform:translateY(-30px) scale(1.3)}}
+#zz .zt{font-size:20px;text-shadow:2px 2px 0 #1a2050}
+#upfx{position:fixed;left:50%;top:50%;z-index:60;width:0;height:0;pointer-events:none;display:none}
+#upfx.on{display:block;animation:upo 1.7s ease-out forwards}
+@keyframes upo{0%,80%{opacity:1}100%{opacity:0}}
+#upfx::before{content:'';position:absolute;left:-170px;top:-100px;width:340px;height:170px;background:rgba(30,18,8,.88);border:3px solid #ffe46a;box-shadow:0 0 0 3px #3e2612,0 8px 0 rgba(0,0,0,.4)}
+#upfx img{position:absolute;left:-28px;top:-88px;width:56px;height:56px;image-rendering:pixelated;filter:drop-shadow(0 3px 0 rgba(0,0,0,.5));animation:upi .6s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes upi{from{transform:scale(0) rotate(-40deg)}to{transform:scale(1) rotate(0)}}
+#upfx div{position:absolute;left:-150px;width:300px;top:-22px;text-align:center;color:#ffe46a;font-size:34px;text-shadow:3px 0 0 #3e2612,-3px 0 0 #3e2612,0 3px 0 #3e2612,0 -3px 0 #3e2612,0 6px 0 rgba(0,0,0,.4);animation:upt .5s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes upt{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+#upfx small{position:absolute;left:-150px;width:300px;top:24px;text-align:center;color:#fff;font-size:22px;text-shadow:2px 2px 0 #3e2612}
+#upfx i{position:absolute;left:-5px;top:-5px;width:10px;height:10px;background:#fff6a0;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:ups .9s ease-out both}
+@keyframes ups{0%{transform:rotate(var(--a)) translateX(0) scale(.3);opacity:1}100%{transform:rotate(var(--a)) translateX(var(--d)) scale(1.6);opacity:0}}
+#banner{position:fixed;left:0;right:0;top:20%;padding:12px 0 14px;background:linear-gradient(90deg,rgba(20,12,4,0),rgba(20,12,4,.55) 25%,rgba(20,12,4,.55) 75%,rgba(20,12,4,0));z-index:18;text-align:center;pointer-events:none;opacity:0;color:#fff4c0;font-size:clamp(28px,7.5vw,48px);text-shadow:3px 0 0 #3e2612,-3px 0 0 #3e2612,0 3px 0 #3e2612,0 -3px 0 #3e2612,3px 3px 0 #3e2612,-3px -3px 0 #3e2612,3px -3px 0 #3e2612,-3px 3px 0 #3e2612,0 6px 0 rgba(0,0,0,.35)}
 #banner small{display:block;font-size:.42em;margin-top:6px;color:#fff;letter-spacing:.08em}
 #banner.on{animation:bnr 2.6s ease-out forwards}
 @keyframes bnr{0%{opacity:0;transform:translateY(-14px) scale(.9)}14%{opacity:1;transform:translateY(0) scale(1)}78%{opacity:1}100%{opacity:0;transform:translateY(-6px)}}
@@ -122,6 +143,8 @@ body:not(.ingame) .g{display:none!important}
 <button id="bag" class="pn g">메뉴</button>
 <div id="toast" class="pn"></div>
 <div id="banner"></div>
+<div id="upfx"></div>
+<div id="zz"><div class="moon"></div><div class="zl"><span>Z</span><span>z</span><span>z</span></div><div class="zt">잠자는 중...</div></div>
 <div id="hotbar" class="pn g"></div>
 <div id="joy" class="g"><div id="knob"></div></div>
 <button id="btnB" class="abtn g">B<br>행동</button>
@@ -672,11 +695,15 @@ function pickFly(id,x,y){const i=pkHead;pkHead=(pkHead+1)%PKN;pkX[i]=x;pkY[i]=y;
 const AMBN=28,amX=new Float32Array(AMBN),amY=new Float32Array(AMBN),amP=new Float32Array(AMBN);
 for(let i=0;i<AMBN;i++){amX[i]=Math.random();amY[i]=Math.random();amP[i]=Math.random()*6.28;}
 function ambMode(){
+if(cw===mine)return 5;
 if(cw!==farm||S.rain)return 0;
 if(S.season===3)return 3;
 if(S.t>=1100||S.t<390)return 1;
 return S.season===2?2:4;
 }
+const SPN=24,spX=new Float32Array(SPN),spY=new Float32Array(SPN),spT=new Float32Array(SPN);
+let spHead=0,spAcc=0,lightT=15,flashT=0,glN=0,growList=[];
+const gl=[];
 const HEART=['.XX.XX.','XXXXXXX','XXXXXXX','.XXXXX.','..XXX..','...X...'];
 
 const NP=80;
@@ -1121,7 +1148,16 @@ if(cw.ground[i]===G.WATER)toast('맑은 물이에요. 물뿌리개나 낚싯대�
 }
 
 const fadeEl=$('fade');
-const bannerEl=$('banner');
+const bannerEl=$('banner'),zzEl=$('zz'),upEl=$('upfx');
+function upFx(t,key){
+upEl.innerHTML='';
+for(let k=0;k<10;k++){const i=document.createElement('i');i.style.setProperty('--a',(k*36)+'deg');i.style.setProperty('--d',(70+(k%3)*18)+'px');upEl.appendChild(i);}
+const im=document.createElement('img');im.src=ICON_URL[key]||'';
+const a=document.createElement('div');a.textContent='강화 성공!';
+const b=document.createElement('small');b.textContent=t;
+upEl.appendChild(im);upEl.appendChild(a);upEl.appendChild(b);
+upEl.classList.remove('on');void upEl.offsetWidth;upEl.classList.add('on');
+}
 function banner(t,sub){
 bannerEl.innerHTML='';
 const a=document.createElement('div');a.textContent=t;
@@ -1129,9 +1165,9 @@ const b=document.createElement('small');b.textContent=sub||'';
 bannerEl.appendChild(a);bannerEl.appendChild(b);
 bannerEl.classList.remove('on');void bannerEl.offsetWidth;bannerEl.classList.add('on');
 }
-function transition(fn,after){
+function transition(fn,after,hold){
 busy=true;fadeEl.style.opacity='1';
-setTimeout(()=>{fn();fadeEl.style.opacity='0';setTimeout(()=>{busy=false;if(after)after();},450);},550);
+setTimeout(()=>{fn();fadeEl.style.opacity='0';setTimeout(()=>{busy=false;if(after)after();},450);},550+(hold|0));
 }
 
 function enterMine(){
@@ -1145,6 +1181,7 @@ transition(()=>{cw=farm;P.x=19*T+8;P.y=5*T+12;P.dir=2;syncP();F.st=0;toast('광�
 }
 
 function newDay(){
+growList.length=0;
 S.day++;
 const prev=S.season;
 S.season=Math.floor((S.day-1)/28)%4;
@@ -1153,7 +1190,7 @@ const f=farm,n=f.w*f.h;
 let wiped=false;
 if(S.season!==prev){f.cropT.fill(0);f.cropD.fill(0);wiped=true;}
 for(let i=0;i<n;i++){
-if(f.cropT[i]&&(f.wet[i]||S.rain)){const cr=CROPS[f.cropT[i]];if(f.cropD[i]<cr.days)f.cropD[i]++;}
+if(f.cropT[i]&&(f.wet[i]||S.rain)){const cr=CROPS[f.cropT[i]];if(f.cropD[i]<cr.days){f.cropD[i]++;if(growList.length<24)growList.push(i);}}
 f.wet[i]=(S.rain&&f.tilled[i])?1:0;
 }
 if(S.season!==3){
@@ -1171,7 +1208,9 @@ return wiped;
 }
 
 function sleepNow(late){
+zzEl.classList.add('on');
 transition(()=>{
+zzEl.classList.remove('on');
 const wiped=newDay();
 S.energy=late?Math.floor(S.maxE*.6):S.maxE;
 S.t=360;cw=farm;F.st=0;
@@ -1180,12 +1219,13 @@ saveGame();
 if(wiped)toast(SEASON[S.season]+'이(가) 되었어요. 작물이 모두 시들었어요');
 else toast(S.rain?'비가 와요. 작물에 물을 안 줘도 돼요':'좋은 아침이에요!');
 },()=>{
+for(let k=0;k<growList.length;k++){const gi=growList[k];burst((gi%farm.w)*T+8,Math.floor(gi/farm.w)*T+6,'#b8ff90',3,26);}
 banner(SEASON[S.season]+' '+(((S.day-1)%28)+1)+'일',S.rain?'비 오는 날':'맑은 날');
 if(S.day===29&&!S.sumShown){
 S.sumShown=1;
 openMenu(()=>({title:'첫 계절을 마쳤어요!',text:'28일 동안 총 '+S.earned+'G를 벌었고\n물고기를 '+S.caught+'마리 낚았어요.\n광산 최고 깊이는 '+S.mineBest+'층이에요.\n\n계속 농장을 키워보세요!',opts:[{label:'계속하기',fn:closeMenu}]}));
 }
-});
+},1000);
 }
 function askSleep(){
 openMenu(()=>({title:'침대',text:'잠자리에 들까요? 다음 날 아침이 시작되고 기운이 회복돼요.',opts:[{label:'잠자기',fn:()=>{closeMenu();sleepNow(S.t>1440);}},{label:'아직 아니에요',fn:closeMenu}]}));
@@ -1301,7 +1341,7 @@ if(S.gold<u.g){toast('골드가 부족해요');return;}
 if(u.item&&(S.inv[u.item]|0)<u.n){toast(ITEMS[u.item].n+'이(가) 부족해요');return;}
 S.gold-=u.g;
 if(u.item)S.inv[u.item]-=u.n;
-S.up[key]++;hbDirty=true;sfx('coin');toast(UPN[key]+' 강화 완료!');
+S.up[key]++;hbDirty=true;sfx('coin');sfx('catch');toast(UPN[key]+' 강화 완료!');upFx(UPN[key]+' Lv'+(lv+1),key);
 return true;
 }});
 }else o.push({label:UPN[key]+' (최대 강화)',fn:()=>{}});
@@ -1581,6 +1621,7 @@ function startPlay(isNew){
 titleOn=false;titleStop();
 document.body.classList.add('ingame');
 titleEl.style.display='none';
+fadeEl.style.transition='none';fadeEl.style.opacity='1';void fadeEl.offsetWidth;fadeEl.style.transition='';fadeEl.style.opacity='0';
 running=true;banner(SEASON[S.season]+' '+(((S.day-1)%28)+1)+'일',S.name+'의 농장');hbDirty=true;H.tick=-1;H.day=-1;H.gold=-1;H.en=-1;
 calcTint();
 if(isNew){
@@ -1752,6 +1793,14 @@ if(camShake>0)camShake-=dt;
 if(swing>0&&S.tool===1&&plAct()===1){const hp=plHand(1);burst(hp[0]+DX[P.dir]*5,hp[1]-1,'#8cc8ff',1,16);}
 for(let i=0;i<PKN;i++){if(pkId[i]){pkT[i]+=dt/0.5;if(pkT[i]>=1){pkId[i]=null;burst(P.x,P.y-14,'#fff2a0',3,22);}}}
 for(let k=0;k<NPCS.length;k++){if(NPCS[k].emo>0)NPCS[k].emo-=dt;}
+if(S.rain&&cw===farm){
+spAcc+=dt*32;
+while(spAcc>=1){spAcc--;const i=spHead;spHead=(spHead+1)%SPN;spX[i]=Math.random();spY[i]=Math.random();spT[i]=0.35;}
+lightT-=dt;
+if(lightT<=0){lightT=14+Math.random()*18;flashT=0.35;}
+}
+for(let i=0;i<SPN;i++){if(spT[i]>0)spT[i]-=dt;}
+if(flashT>0)flashT-=dt;
 const am=ambMode();
 if(am){
 for(let i=0;i<AMBN;i++){
@@ -1823,15 +1872,37 @@ break;
 }
 case O.ROCK:ctx.drawImage(SPR.rock,px+sk,py);break;
 case O.WEED:ctx.drawImage(SPR.weed[S.season],px,py);break;
-case O.COPPER:case O.IRON:case O.GOLD:ctx.drawImage(SPR.ore[o],px+sk,py);break;
+case O.COPPER:case O.IRON:case O.GOLD:
+ctx.drawImage(SPR.ore[o],px+sk,py);
+if(((gt*1.3+x*.7+y*.4)%3)<.12){const gx=px+4+((x*5+y*3)&7),gy=py+4+((x*3+y*7)&5);ctx.fillStyle='#fff';ctx.fillRect(gx,gy,1,1);ctx.fillRect(gx-1,gy,3,1);ctx.fillRect(gx,gy-1,1,3);}
+break;
 case O.LADDER:ctx.drawImage(SPR.ladder,px,py);break;
 case O.EXIT:ctx.drawImage(SPR.exit,px,py);break;
-case O.HOUSE:ctx.drawImage(SPR.house,px,py+T-64);break;
-case O.SHOP:ctx.drawImage(SPR.shop,px,py+T-64);break;
+case O.HOUSE:ctx.drawImage(SPR.house,px,py+T-64);gl[glN++]=px;gl[glN++]=py+T-64;gl[glN++]=0;break;
+case O.SHOP:ctx.drawImage(SPR.shop,px,py+T-64);gl[glN++]=px;gl[glN++]=py+T-64;gl[glN++]=1;break;
 case O.CAVE:ctx.drawImage(SPR.cave,px,py+T-48);break;
 }
 }
 
+function drawGlow(){
+if(cw!==farm||!glN)return;
+let nf=0;
+if(S.t>=1020)nf=Math.min(1,(S.t-1020)/180);
+else if(S.t<450)nf=Math.min(1,(450-S.t)/60);
+if(S.rain)nf=Math.max(nf,.55);
+if(nf<=0)return;
+for(let k=0;k<glN;k+=3){
+const bx=(gl[k]-camX)*SC,by=(gl[k+1]-camY)*SC;
+const w=gl[k+2]?[[10,48,16,10],[70,48,16,10],[35,48,10,6]]:[[10,42,12,12],[58,42,12,12],[35,42,10,6]];
+for(let j=0;j<3;j++){
+const r=w[j];
+ctx.fillStyle='rgba(255,196,90,'+(0.16*nf)+')';
+ctx.fillRect(bx+(r[0]-3)*SC,by+(r[1]-3)*SC,(r[2]+6)*SC,(r[3]+6)*SC);
+ctx.fillStyle='rgba(255,226,140,'+(0.9*nf)+')';
+ctx.fillRect(bx+r[0]*SC,by+r[1]*SC,r[2]*SC,r[3]*SC);
+}
+}
+}
 function drawAmbient(){
 const am=ambMode();
 if(!am)return;
@@ -1846,6 +1917,12 @@ for(let i=0;i<16;i++){
 const a=.5+.5*Math.sin(gt*3+amP[i]),x=amX[i]*VW|0,y=amY[i]*VH|0;
 ctx.fillStyle='rgba(255,250,150,'+(0.28*a)+')';ctx.fillRect(x-sz*2,y-sz*2,sz*5,sz*5);
 ctx.fillStyle='rgba(255,252,190,'+(0.4+0.6*a)+')';ctx.fillRect(x,y,sz,sz);
+}
+}else if(am===5){
+for(let i=0;i<14;i++){
+const a=.15+.2*Math.sin(gt*1.6+amP[i]);
+ctx.fillStyle='rgba(200,210,255,'+a+')';
+ctx.fillRect(amX[i]*VW|0,amY[i]*VH|0,sz,sz);
 }
 }else{
 const cols=['#ff8ab8','#ffd84a','#8ac8ff','#ffffff','#ffa04a','#c8a0ff','#ff6a6a'];
@@ -1872,6 +1949,7 @@ if(camShake>0){cx+=Math.round((Math.random()-.5)*camShake*16);cy+=Math.round((Ma
 camX=cx;camY=cy;
 ctx.setTransform(SC,0,0,SC,-cx*SC,-cy*SC);
 const x0=Math.max(0,Math.floor(cx/T)),x1=Math.min(cw.w-1,Math.floor((cx+vw)/T)),y0=Math.max(0,Math.floor(cy/T)),y1=Math.min(cw.h-1,Math.floor((cy+vh)/T));
+glN=0;
 const gs=SPR.grass[S.season],wf=((gt*3)|0)&3;
 for(let y=y0;y<=y1;y++){
 for(let x=x0;x<=x1;x++){
@@ -1973,8 +2051,19 @@ ctx.globalCompositeOperation='multiply';
 ctx.fillStyle=cw===farm?tintStr:MINE_TINT;
 ctx.fillRect(0,0,VW,VH);
 ctx.globalCompositeOperation='source-over';
+drawGlow();
 drawAmbient();
 if(S.rain&&cw===farm){
+ctx.strokeStyle='rgba(205,228,255,.75)';
+ctx.lineWidth=Math.max(1,SC*.5);
+for(let i=0;i<SPN;i++){
+if(spT[i]<=0)continue;
+const p=1-spT[i]/0.35,w=SC*(1+p*3);
+ctx.globalAlpha=(1-p)*.8;
+ctx.beginPath();ctx.ellipse(spX[i]*VW,spY[i]*VH,w,w*.4,0,0,6.283);ctx.stroke();
+}
+ctx.globalAlpha=1;
+if(flashT>0){ctx.fillStyle='rgba(235,240,255,'+(flashT/0.35*.55)+')';ctx.fillRect(0,0,VW,VH);}
 ctx.fillStyle='rgba(190,210,255,.6)';
 const rw=Math.max(1,DPR),rh=14*DPR;
 for(let i=0;i<NR;i++)ctx.fillRect(rX[i]*VW,rY[i]*VH,rw,rh);
